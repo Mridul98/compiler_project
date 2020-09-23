@@ -1,0 +1,1678 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COMMA
+    DECOPS
+    INCOPS
+    LOGICNOTOPS
+
+Grammar
+
+Rule 0     S' -> function
+Rule 1     function -> type FUNCDEF LBRACKET RBRACKET LCURLY statements RCURLY
+Rule 2     statements -> statements allstatement
+Rule 3     statements -> empty
+Rule 4     allstatement -> statement
+Rule 5     allstatement -> condstatement
+Rule 6     allstatement -> returnstatement
+Rule 7     returnstatement -> RETURNTYPE simpleExpression SEMICOLON
+Rule 8     condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY
+Rule 9     condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY
+Rule 10    statement -> FUNCDEF ASSIGNMENTOPS expression SEMICOLON
+Rule 11    statement -> type FUNCDEF ASSIGNMENTOPS expression SEMICOLON
+Rule 12    statement -> type FUNCDEF SEMICOLON
+Rule 13    statement -> type FUNCDEF ASSIGNMENTOPS FUNCDEF SEMICOLON
+Rule 14    statement -> FUNCDEF hybridEqual expression SEMICOLON
+Rule 15    hybridEqual -> PLUSEQUAL
+Rule 16    hybridEqual -> MINUSEQUAL
+Rule 17    hybridEqual -> DIVEQUAL
+Rule 18    hybridEqual -> MULEQUAL
+Rule 19    simpleExpression -> simpleExpression LOGICOROPS andExpression
+Rule 20    simpleExpression -> andExpression
+Rule 21    andExpression -> andExpression LOGICANDOPS relExpression
+Rule 22    andExpression -> relExpression
+Rule 23    relExpression -> expression GREATERTHAN expression
+Rule 24    relExpression -> expression GREATERTHANEQUAL expression
+Rule 25    relExpression -> expression LESSTHAN expression
+Rule 26    relExpression -> expression LESSTHANEQUAL expression
+Rule 27    relExpression -> expression EQUALEQUAL expression
+Rule 28    relExpression -> expression NOTEQUAL expression
+Rule 29    relExpression -> expression
+Rule 30    expression -> expression PLUS terms
+Rule 31    expression -> expression MINUS terms
+Rule 32    expression -> terms
+Rule 33    terms -> terms MUL factor
+Rule 34    terms -> terms DIV factor
+Rule 35    terms -> terms MOD factor
+Rule 36    terms -> factor
+Rule 37    factor -> NUMBER
+Rule 38    factor -> FUNCDEF
+Rule 39    factor -> LBRACKET expression RBRACKET
+Rule 40    type -> INTTYPE
+Rule 41    type -> FLOATTYPE
+Rule 42    type -> DOUBLETYPE
+Rule 43    type -> VOIDTYPE
+Rule 44    type -> BOOLTYPE
+Rule 45    empty -> <empty>
+Rule 46    ifstart -> empty
+Rule 47    ifend -> empty
+Rule 48    elsestart -> empty
+Rule 49    elseend -> empty
+
+Terminals, with rules where they appear
+
+ASSIGNMENTOPS        : 10 11 13
+BOOLTYPE             : 44
+COMMA                : 
+DECOPS               : 
+DIV                  : 34
+DIVEQUAL             : 17
+DOUBLETYPE           : 42
+ELSE                 : 9
+EQUALEQUAL           : 27
+FLOATTYPE            : 41
+FUNCDEF              : 1 10 11 12 13 13 14 38
+GREATERTHAN          : 23
+GREATERTHANEQUAL     : 24
+IF                   : 8 9
+INCOPS               : 
+INTTYPE              : 40
+LBRACKET             : 1 8 9 39
+LCURLY               : 1 8 9 9
+LESSTHAN             : 25
+LESSTHANEQUAL        : 26
+LOGICANDOPS          : 21
+LOGICNOTOPS          : 
+LOGICOROPS           : 19
+MINUS                : 31
+MINUSEQUAL           : 16
+MOD                  : 35
+MUL                  : 33
+MULEQUAL             : 18
+NOTEQUAL             : 28
+NUMBER               : 37
+PLUS                 : 30
+PLUSEQUAL            : 15
+RBRACKET             : 1 8 9 39
+RCURLY               : 1 8 9 9
+RETURNTYPE           : 7
+SEMICOLON            : 7 10 11 12 13 14
+VOIDTYPE             : 43
+error                : 
+
+Nonterminals, with rules where they appear
+
+allstatement         : 2
+andExpression        : 19 20 21
+condstatement        : 5
+elseend              : 9
+elsestart            : 9
+empty                : 3 46 47 48 49
+expression           : 10 11 14 23 23 24 24 25 25 26 26 27 27 28 28 29 30 31 39
+factor               : 33 34 35 36
+function             : 0
+hybridEqual          : 14
+ifend                : 8 9
+ifstart              : 8 9
+relExpression        : 21 22
+returnstatement      : 6
+simpleExpression     : 7 8 9 19
+statement            : 4
+statements           : 1 2 8 9 9
+terms                : 30 31 32 33 34 35
+type                 : 1 11 12 13
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . function
+    (1) function -> . type FUNCDEF LBRACKET RBRACKET LCURLY statements RCURLY
+    (40) type -> . INTTYPE
+    (41) type -> . FLOATTYPE
+    (42) type -> . DOUBLETYPE
+    (43) type -> . VOIDTYPE
+    (44) type -> . BOOLTYPE
+
+    INTTYPE         shift and go to state 3
+    FLOATTYPE       shift and go to state 4
+    DOUBLETYPE      shift and go to state 5
+    VOIDTYPE        shift and go to state 6
+    BOOLTYPE        shift and go to state 7
+
+    function                       shift and go to state 1
+    type                           shift and go to state 2
+
+state 1
+
+    (0) S' -> function .
+
+
+
+state 2
+
+    (1) function -> type . FUNCDEF LBRACKET RBRACKET LCURLY statements RCURLY
+
+    FUNCDEF         shift and go to state 8
+
+
+state 3
+
+    (40) type -> INTTYPE .
+
+    FUNCDEF         reduce using rule 40 (type -> INTTYPE .)
+
+
+state 4
+
+    (41) type -> FLOATTYPE .
+
+    FUNCDEF         reduce using rule 41 (type -> FLOATTYPE .)
+
+
+state 5
+
+    (42) type -> DOUBLETYPE .
+
+    FUNCDEF         reduce using rule 42 (type -> DOUBLETYPE .)
+
+
+state 6
+
+    (43) type -> VOIDTYPE .
+
+    FUNCDEF         reduce using rule 43 (type -> VOIDTYPE .)
+
+
+state 7
+
+    (44) type -> BOOLTYPE .
+
+    FUNCDEF         reduce using rule 44 (type -> BOOLTYPE .)
+
+
+state 8
+
+    (1) function -> type FUNCDEF . LBRACKET RBRACKET LCURLY statements RCURLY
+
+    LBRACKET        shift and go to state 9
+
+
+state 9
+
+    (1) function -> type FUNCDEF LBRACKET . RBRACKET LCURLY statements RCURLY
+
+    RBRACKET        shift and go to state 10
+
+
+state 10
+
+    (1) function -> type FUNCDEF LBRACKET RBRACKET . LCURLY statements RCURLY
+
+    LCURLY          shift and go to state 11
+
+
+state 11
+
+    (1) function -> type FUNCDEF LBRACKET RBRACKET LCURLY . statements RCURLY
+    (2) statements -> . statements allstatement
+    (3) statements -> . empty
+    (45) empty -> .
+
+    RCURLY          reduce using rule 45 (empty -> .)
+    FUNCDEF         reduce using rule 45 (empty -> .)
+    IF              reduce using rule 45 (empty -> .)
+    RETURNTYPE      reduce using rule 45 (empty -> .)
+    INTTYPE         reduce using rule 45 (empty -> .)
+    FLOATTYPE       reduce using rule 45 (empty -> .)
+    DOUBLETYPE      reduce using rule 45 (empty -> .)
+    VOIDTYPE        reduce using rule 45 (empty -> .)
+    BOOLTYPE        reduce using rule 45 (empty -> .)
+
+    statements                     shift and go to state 12
+    empty                          shift and go to state 13
+
+state 12
+
+    (1) function -> type FUNCDEF LBRACKET RBRACKET LCURLY statements . RCURLY
+    (2) statements -> statements . allstatement
+    (4) allstatement -> . statement
+    (5) allstatement -> . condstatement
+    (6) allstatement -> . returnstatement
+    (10) statement -> . FUNCDEF ASSIGNMENTOPS expression SEMICOLON
+    (11) statement -> . type FUNCDEF ASSIGNMENTOPS expression SEMICOLON
+    (12) statement -> . type FUNCDEF SEMICOLON
+    (13) statement -> . type FUNCDEF ASSIGNMENTOPS FUNCDEF SEMICOLON
+    (14) statement -> . FUNCDEF hybridEqual expression SEMICOLON
+    (8) condstatement -> . IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY
+    (9) condstatement -> . IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY
+    (7) returnstatement -> . RETURNTYPE simpleExpression SEMICOLON
+    (40) type -> . INTTYPE
+    (41) type -> . FLOATTYPE
+    (42) type -> . DOUBLETYPE
+    (43) type -> . VOIDTYPE
+    (44) type -> . BOOLTYPE
+
+    RCURLY          shift and go to state 16
+    FUNCDEF         shift and go to state 15
+    IF              shift and go to state 21
+    RETURNTYPE      shift and go to state 22
+    INTTYPE         shift and go to state 3
+    FLOATTYPE       shift and go to state 4
+    DOUBLETYPE      shift and go to state 5
+    VOIDTYPE        shift and go to state 6
+    BOOLTYPE        shift and go to state 7
+
+    type                           shift and go to state 14
+    allstatement                   shift and go to state 17
+    statement                      shift and go to state 18
+    condstatement                  shift and go to state 19
+    returnstatement                shift and go to state 20
+
+state 13
+
+    (3) statements -> empty .
+
+    RCURLY          reduce using rule 3 (statements -> empty .)
+    FUNCDEF         reduce using rule 3 (statements -> empty .)
+    IF              reduce using rule 3 (statements -> empty .)
+    RETURNTYPE      reduce using rule 3 (statements -> empty .)
+    INTTYPE         reduce using rule 3 (statements -> empty .)
+    FLOATTYPE       reduce using rule 3 (statements -> empty .)
+    DOUBLETYPE      reduce using rule 3 (statements -> empty .)
+    VOIDTYPE        reduce using rule 3 (statements -> empty .)
+    BOOLTYPE        reduce using rule 3 (statements -> empty .)
+
+
+state 14
+
+    (11) statement -> type . FUNCDEF ASSIGNMENTOPS expression SEMICOLON
+    (12) statement -> type . FUNCDEF SEMICOLON
+    (13) statement -> type . FUNCDEF ASSIGNMENTOPS FUNCDEF SEMICOLON
+
+    FUNCDEF         shift and go to state 23
+
+
+state 15
+
+    (10) statement -> FUNCDEF . ASSIGNMENTOPS expression SEMICOLON
+    (14) statement -> FUNCDEF . hybridEqual expression SEMICOLON
+    (15) hybridEqual -> . PLUSEQUAL
+    (16) hybridEqual -> . MINUSEQUAL
+    (17) hybridEqual -> . DIVEQUAL
+    (18) hybridEqual -> . MULEQUAL
+
+    ASSIGNMENTOPS   shift and go to state 24
+    PLUSEQUAL       shift and go to state 26
+    MINUSEQUAL      shift and go to state 27
+    DIVEQUAL        shift and go to state 28
+    MULEQUAL        shift and go to state 29
+
+    hybridEqual                    shift and go to state 25
+
+state 16
+
+    (1) function -> type FUNCDEF LBRACKET RBRACKET LCURLY statements RCURLY .
+
+    $end            reduce using rule 1 (function -> type FUNCDEF LBRACKET RBRACKET LCURLY statements RCURLY .)
+
+
+state 17
+
+    (2) statements -> statements allstatement .
+
+    RCURLY          reduce using rule 2 (statements -> statements allstatement .)
+    FUNCDEF         reduce using rule 2 (statements -> statements allstatement .)
+    IF              reduce using rule 2 (statements -> statements allstatement .)
+    RETURNTYPE      reduce using rule 2 (statements -> statements allstatement .)
+    INTTYPE         reduce using rule 2 (statements -> statements allstatement .)
+    FLOATTYPE       reduce using rule 2 (statements -> statements allstatement .)
+    DOUBLETYPE      reduce using rule 2 (statements -> statements allstatement .)
+    VOIDTYPE        reduce using rule 2 (statements -> statements allstatement .)
+    BOOLTYPE        reduce using rule 2 (statements -> statements allstatement .)
+
+
+state 18
+
+    (4) allstatement -> statement .
+
+    RCURLY          reduce using rule 4 (allstatement -> statement .)
+    FUNCDEF         reduce using rule 4 (allstatement -> statement .)
+    IF              reduce using rule 4 (allstatement -> statement .)
+    RETURNTYPE      reduce using rule 4 (allstatement -> statement .)
+    INTTYPE         reduce using rule 4 (allstatement -> statement .)
+    FLOATTYPE       reduce using rule 4 (allstatement -> statement .)
+    DOUBLETYPE      reduce using rule 4 (allstatement -> statement .)
+    VOIDTYPE        reduce using rule 4 (allstatement -> statement .)
+    BOOLTYPE        reduce using rule 4 (allstatement -> statement .)
+
+
+state 19
+
+    (5) allstatement -> condstatement .
+
+    RCURLY          reduce using rule 5 (allstatement -> condstatement .)
+    FUNCDEF         reduce using rule 5 (allstatement -> condstatement .)
+    IF              reduce using rule 5 (allstatement -> condstatement .)
+    RETURNTYPE      reduce using rule 5 (allstatement -> condstatement .)
+    INTTYPE         reduce using rule 5 (allstatement -> condstatement .)
+    FLOATTYPE       reduce using rule 5 (allstatement -> condstatement .)
+    DOUBLETYPE      reduce using rule 5 (allstatement -> condstatement .)
+    VOIDTYPE        reduce using rule 5 (allstatement -> condstatement .)
+    BOOLTYPE        reduce using rule 5 (allstatement -> condstatement .)
+
+
+state 20
+
+    (6) allstatement -> returnstatement .
+
+    RCURLY          reduce using rule 6 (allstatement -> returnstatement .)
+    FUNCDEF         reduce using rule 6 (allstatement -> returnstatement .)
+    IF              reduce using rule 6 (allstatement -> returnstatement .)
+    RETURNTYPE      reduce using rule 6 (allstatement -> returnstatement .)
+    INTTYPE         reduce using rule 6 (allstatement -> returnstatement .)
+    FLOATTYPE       reduce using rule 6 (allstatement -> returnstatement .)
+    DOUBLETYPE      reduce using rule 6 (allstatement -> returnstatement .)
+    VOIDTYPE        reduce using rule 6 (allstatement -> returnstatement .)
+    BOOLTYPE        reduce using rule 6 (allstatement -> returnstatement .)
+
+
+state 21
+
+    (8) condstatement -> IF . LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY
+    (9) condstatement -> IF . LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY
+
+    LBRACKET        shift and go to state 30
+
+
+state 22
+
+    (7) returnstatement -> RETURNTYPE . simpleExpression SEMICOLON
+    (19) simpleExpression -> . simpleExpression LOGICOROPS andExpression
+    (20) simpleExpression -> . andExpression
+    (21) andExpression -> . andExpression LOGICANDOPS relExpression
+    (22) andExpression -> . relExpression
+    (23) relExpression -> . expression GREATERTHAN expression
+    (24) relExpression -> . expression GREATERTHANEQUAL expression
+    (25) relExpression -> . expression LESSTHAN expression
+    (26) relExpression -> . expression LESSTHANEQUAL expression
+    (27) relExpression -> . expression EQUALEQUAL expression
+    (28) relExpression -> . expression NOTEQUAL expression
+    (29) relExpression -> . expression
+    (30) expression -> . expression PLUS terms
+    (31) expression -> . expression MINUS terms
+    (32) expression -> . terms
+    (33) terms -> . terms MUL factor
+    (34) terms -> . terms DIV factor
+    (35) terms -> . terms MOD factor
+    (36) terms -> . factor
+    (37) factor -> . NUMBER
+    (38) factor -> . FUNCDEF
+    (39) factor -> . LBRACKET expression RBRACKET
+
+    NUMBER          shift and go to state 37
+    FUNCDEF         shift and go to state 38
+    LBRACKET        shift and go to state 39
+
+    simpleExpression               shift and go to state 31
+    andExpression                  shift and go to state 32
+    relExpression                  shift and go to state 33
+    expression                     shift and go to state 34
+    terms                          shift and go to state 35
+    factor                         shift and go to state 36
+
+state 23
+
+    (11) statement -> type FUNCDEF . ASSIGNMENTOPS expression SEMICOLON
+    (12) statement -> type FUNCDEF . SEMICOLON
+    (13) statement -> type FUNCDEF . ASSIGNMENTOPS FUNCDEF SEMICOLON
+
+    ASSIGNMENTOPS   shift and go to state 40
+    SEMICOLON       shift and go to state 41
+
+
+state 24
+
+    (10) statement -> FUNCDEF ASSIGNMENTOPS . expression SEMICOLON
+    (30) expression -> . expression PLUS terms
+    (31) expression -> . expression MINUS terms
+    (32) expression -> . terms
+    (33) terms -> . terms MUL factor
+    (34) terms -> . terms DIV factor
+    (35) terms -> . terms MOD factor
+    (36) terms -> . factor
+    (37) factor -> . NUMBER
+    (38) factor -> . FUNCDEF
+    (39) factor -> . LBRACKET expression RBRACKET
+
+    NUMBER          shift and go to state 37
+    FUNCDEF         shift and go to state 38
+    LBRACKET        shift and go to state 39
+
+    expression                     shift and go to state 42
+    terms                          shift and go to state 35
+    factor                         shift and go to state 36
+
+state 25
+
+    (14) statement -> FUNCDEF hybridEqual . expression SEMICOLON
+    (30) expression -> . expression PLUS terms
+    (31) expression -> . expression MINUS terms
+    (32) expression -> . terms
+    (33) terms -> . terms MUL factor
+    (34) terms -> . terms DIV factor
+    (35) terms -> . terms MOD factor
+    (36) terms -> . factor
+    (37) factor -> . NUMBER
+    (38) factor -> . FUNCDEF
+    (39) factor -> . LBRACKET expression RBRACKET
+
+    NUMBER          shift and go to state 37
+    FUNCDEF         shift and go to state 38
+    LBRACKET        shift and go to state 39
+
+    expression                     shift and go to state 43
+    terms                          shift and go to state 35
+    factor                         shift and go to state 36
+
+state 26
+
+    (15) hybridEqual -> PLUSEQUAL .
+
+    NUMBER          reduce using rule 15 (hybridEqual -> PLUSEQUAL .)
+    FUNCDEF         reduce using rule 15 (hybridEqual -> PLUSEQUAL .)
+    LBRACKET        reduce using rule 15 (hybridEqual -> PLUSEQUAL .)
+
+
+state 27
+
+    (16) hybridEqual -> MINUSEQUAL .
+
+    NUMBER          reduce using rule 16 (hybridEqual -> MINUSEQUAL .)
+    FUNCDEF         reduce using rule 16 (hybridEqual -> MINUSEQUAL .)
+    LBRACKET        reduce using rule 16 (hybridEqual -> MINUSEQUAL .)
+
+
+state 28
+
+    (17) hybridEqual -> DIVEQUAL .
+
+    NUMBER          reduce using rule 17 (hybridEqual -> DIVEQUAL .)
+    FUNCDEF         reduce using rule 17 (hybridEqual -> DIVEQUAL .)
+    LBRACKET        reduce using rule 17 (hybridEqual -> DIVEQUAL .)
+
+
+state 29
+
+    (18) hybridEqual -> MULEQUAL .
+
+    NUMBER          reduce using rule 18 (hybridEqual -> MULEQUAL .)
+    FUNCDEF         reduce using rule 18 (hybridEqual -> MULEQUAL .)
+    LBRACKET        reduce using rule 18 (hybridEqual -> MULEQUAL .)
+
+
+state 30
+
+    (8) condstatement -> IF LBRACKET . simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY
+    (9) condstatement -> IF LBRACKET . simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY
+    (19) simpleExpression -> . simpleExpression LOGICOROPS andExpression
+    (20) simpleExpression -> . andExpression
+    (21) andExpression -> . andExpression LOGICANDOPS relExpression
+    (22) andExpression -> . relExpression
+    (23) relExpression -> . expression GREATERTHAN expression
+    (24) relExpression -> . expression GREATERTHANEQUAL expression
+    (25) relExpression -> . expression LESSTHAN expression
+    (26) relExpression -> . expression LESSTHANEQUAL expression
+    (27) relExpression -> . expression EQUALEQUAL expression
+    (28) relExpression -> . expression NOTEQUAL expression
+    (29) relExpression -> . expression
+    (30) expression -> . expression PLUS terms
+    (31) expression -> . expression MINUS terms
+    (32) expression -> . terms
+    (33) terms -> . terms MUL factor
+    (34) terms -> . terms DIV factor
+    (35) terms -> . terms MOD factor
+    (36) terms -> . factor
+    (37) factor -> . NUMBER
+    (38) factor -> . FUNCDEF
+    (39) factor -> . LBRACKET expression RBRACKET
+
+    NUMBER          shift and go to state 37
+    FUNCDEF         shift and go to state 38
+    LBRACKET        shift and go to state 39
+
+    simpleExpression               shift and go to state 44
+    andExpression                  shift and go to state 32
+    relExpression                  shift and go to state 33
+    expression                     shift and go to state 34
+    terms                          shift and go to state 35
+    factor                         shift and go to state 36
+
+state 31
+
+    (7) returnstatement -> RETURNTYPE simpleExpression . SEMICOLON
+    (19) simpleExpression -> simpleExpression . LOGICOROPS andExpression
+
+    SEMICOLON       shift and go to state 45
+    LOGICOROPS      shift and go to state 46
+
+
+state 32
+
+    (20) simpleExpression -> andExpression .
+    (21) andExpression -> andExpression . LOGICANDOPS relExpression
+
+    SEMICOLON       reduce using rule 20 (simpleExpression -> andExpression .)
+    LOGICOROPS      reduce using rule 20 (simpleExpression -> andExpression .)
+    RBRACKET        reduce using rule 20 (simpleExpression -> andExpression .)
+    LOGICANDOPS     shift and go to state 47
+
+
+state 33
+
+    (22) andExpression -> relExpression .
+
+    LOGICANDOPS     reduce using rule 22 (andExpression -> relExpression .)
+    SEMICOLON       reduce using rule 22 (andExpression -> relExpression .)
+    LOGICOROPS      reduce using rule 22 (andExpression -> relExpression .)
+    RBRACKET        reduce using rule 22 (andExpression -> relExpression .)
+
+
+state 34
+
+    (23) relExpression -> expression . GREATERTHAN expression
+    (24) relExpression -> expression . GREATERTHANEQUAL expression
+    (25) relExpression -> expression . LESSTHAN expression
+    (26) relExpression -> expression . LESSTHANEQUAL expression
+    (27) relExpression -> expression . EQUALEQUAL expression
+    (28) relExpression -> expression . NOTEQUAL expression
+    (29) relExpression -> expression .
+    (30) expression -> expression . PLUS terms
+    (31) expression -> expression . MINUS terms
+
+    GREATERTHAN     shift and go to state 48
+    GREATERTHANEQUAL shift and go to state 49
+    LESSTHAN        shift and go to state 50
+    LESSTHANEQUAL   shift and go to state 51
+    EQUALEQUAL      shift and go to state 52
+    NOTEQUAL        shift and go to state 53
+    LOGICANDOPS     reduce using rule 29 (relExpression -> expression .)
+    SEMICOLON       reduce using rule 29 (relExpression -> expression .)
+    LOGICOROPS      reduce using rule 29 (relExpression -> expression .)
+    RBRACKET        reduce using rule 29 (relExpression -> expression .)
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+
+
+state 35
+
+    (32) expression -> terms .
+    (33) terms -> terms . MUL factor
+    (34) terms -> terms . DIV factor
+    (35) terms -> terms . MOD factor
+
+    GREATERTHAN     reduce using rule 32 (expression -> terms .)
+    GREATERTHANEQUAL reduce using rule 32 (expression -> terms .)
+    LESSTHAN        reduce using rule 32 (expression -> terms .)
+    LESSTHANEQUAL   reduce using rule 32 (expression -> terms .)
+    EQUALEQUAL      reduce using rule 32 (expression -> terms .)
+    NOTEQUAL        reduce using rule 32 (expression -> terms .)
+    PLUS            reduce using rule 32 (expression -> terms .)
+    MINUS           reduce using rule 32 (expression -> terms .)
+    LOGICANDOPS     reduce using rule 32 (expression -> terms .)
+    SEMICOLON       reduce using rule 32 (expression -> terms .)
+    LOGICOROPS      reduce using rule 32 (expression -> terms .)
+    RBRACKET        reduce using rule 32 (expression -> terms .)
+    MUL             shift and go to state 56
+    DIV             shift and go to state 57
+    MOD             shift and go to state 58
+
+
+state 36
+
+    (36) terms -> factor .
+
+    MUL             reduce using rule 36 (terms -> factor .)
+    DIV             reduce using rule 36 (terms -> factor .)
+    MOD             reduce using rule 36 (terms -> factor .)
+    GREATERTHAN     reduce using rule 36 (terms -> factor .)
+    GREATERTHANEQUAL reduce using rule 36 (terms -> factor .)
+    LESSTHAN        reduce using rule 36 (terms -> factor .)
+    LESSTHANEQUAL   reduce using rule 36 (terms -> factor .)
+    EQUALEQUAL      reduce using rule 36 (terms -> factor .)
+    NOTEQUAL        reduce using rule 36 (terms -> factor .)
+    PLUS            reduce using rule 36 (terms -> factor .)
+    MINUS           reduce using rule 36 (terms -> factor .)
+    LOGICANDOPS     reduce using rule 36 (terms -> factor .)
+    SEMICOLON       reduce using rule 36 (terms -> factor .)
+    LOGICOROPS      reduce using rule 36 (terms -> factor .)
+    RBRACKET        reduce using rule 36 (terms -> factor .)
+
+
+state 37
+
+    (37) factor -> NUMBER .
+
+    MUL             reduce using rule 37 (factor -> NUMBER .)
+    DIV             reduce using rule 37 (factor -> NUMBER .)
+    MOD             reduce using rule 37 (factor -> NUMBER .)
+    GREATERTHAN     reduce using rule 37 (factor -> NUMBER .)
+    GREATERTHANEQUAL reduce using rule 37 (factor -> NUMBER .)
+    LESSTHAN        reduce using rule 37 (factor -> NUMBER .)
+    LESSTHANEQUAL   reduce using rule 37 (factor -> NUMBER .)
+    EQUALEQUAL      reduce using rule 37 (factor -> NUMBER .)
+    NOTEQUAL        reduce using rule 37 (factor -> NUMBER .)
+    PLUS            reduce using rule 37 (factor -> NUMBER .)
+    MINUS           reduce using rule 37 (factor -> NUMBER .)
+    LOGICANDOPS     reduce using rule 37 (factor -> NUMBER .)
+    SEMICOLON       reduce using rule 37 (factor -> NUMBER .)
+    LOGICOROPS      reduce using rule 37 (factor -> NUMBER .)
+    RBRACKET        reduce using rule 37 (factor -> NUMBER .)
+
+
+state 38
+
+    (38) factor -> FUNCDEF .
+
+    MUL             reduce using rule 38 (factor -> FUNCDEF .)
+    DIV             reduce using rule 38 (factor -> FUNCDEF .)
+    MOD             reduce using rule 38 (factor -> FUNCDEF .)
+    GREATERTHAN     reduce using rule 38 (factor -> FUNCDEF .)
+    GREATERTHANEQUAL reduce using rule 38 (factor -> FUNCDEF .)
+    LESSTHAN        reduce using rule 38 (factor -> FUNCDEF .)
+    LESSTHANEQUAL   reduce using rule 38 (factor -> FUNCDEF .)
+    EQUALEQUAL      reduce using rule 38 (factor -> FUNCDEF .)
+    NOTEQUAL        reduce using rule 38 (factor -> FUNCDEF .)
+    PLUS            reduce using rule 38 (factor -> FUNCDEF .)
+    MINUS           reduce using rule 38 (factor -> FUNCDEF .)
+    LOGICANDOPS     reduce using rule 38 (factor -> FUNCDEF .)
+    SEMICOLON       reduce using rule 38 (factor -> FUNCDEF .)
+    LOGICOROPS      reduce using rule 38 (factor -> FUNCDEF .)
+    RBRACKET        reduce using rule 38 (factor -> FUNCDEF .)
+
+
+state 39
+
+    (39) factor -> LBRACKET . expression RBRACKET
+    (30) expression -> . expression PLUS terms
+    (31) expression -> . expression MINUS terms
+    (32) expression -> . terms
+    (33) terms -> . terms MUL factor
+    (34) terms -> . terms DIV factor
+    (35) terms -> . terms MOD factor
+    (36) terms -> . factor
+    (37) factor -> . NUMBER
+    (38) factor -> . FUNCDEF
+    (39) factor -> . LBRACKET expression RBRACKET
+
+    NUMBER          shift and go to state 37
+    FUNCDEF         shift and go to state 38
+    LBRACKET        shift and go to state 39
+
+    expression                     shift and go to state 59
+    terms                          shift and go to state 35
+    factor                         shift and go to state 36
+
+state 40
+
+    (11) statement -> type FUNCDEF ASSIGNMENTOPS . expression SEMICOLON
+    (13) statement -> type FUNCDEF ASSIGNMENTOPS . FUNCDEF SEMICOLON
+    (30) expression -> . expression PLUS terms
+    (31) expression -> . expression MINUS terms
+    (32) expression -> . terms
+    (33) terms -> . terms MUL factor
+    (34) terms -> . terms DIV factor
+    (35) terms -> . terms MOD factor
+    (36) terms -> . factor
+    (37) factor -> . NUMBER
+    (38) factor -> . FUNCDEF
+    (39) factor -> . LBRACKET expression RBRACKET
+
+    FUNCDEF         shift and go to state 60
+    NUMBER          shift and go to state 37
+    LBRACKET        shift and go to state 39
+
+    expression                     shift and go to state 61
+    terms                          shift and go to state 35
+    factor                         shift and go to state 36
+
+state 41
+
+    (12) statement -> type FUNCDEF SEMICOLON .
+
+    RCURLY          reduce using rule 12 (statement -> type FUNCDEF SEMICOLON .)
+    FUNCDEF         reduce using rule 12 (statement -> type FUNCDEF SEMICOLON .)
+    IF              reduce using rule 12 (statement -> type FUNCDEF SEMICOLON .)
+    RETURNTYPE      reduce using rule 12 (statement -> type FUNCDEF SEMICOLON .)
+    INTTYPE         reduce using rule 12 (statement -> type FUNCDEF SEMICOLON .)
+    FLOATTYPE       reduce using rule 12 (statement -> type FUNCDEF SEMICOLON .)
+    DOUBLETYPE      reduce using rule 12 (statement -> type FUNCDEF SEMICOLON .)
+    VOIDTYPE        reduce using rule 12 (statement -> type FUNCDEF SEMICOLON .)
+    BOOLTYPE        reduce using rule 12 (statement -> type FUNCDEF SEMICOLON .)
+
+
+state 42
+
+    (10) statement -> FUNCDEF ASSIGNMENTOPS expression . SEMICOLON
+    (30) expression -> expression . PLUS terms
+    (31) expression -> expression . MINUS terms
+
+    SEMICOLON       shift and go to state 62
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+
+
+state 43
+
+    (14) statement -> FUNCDEF hybridEqual expression . SEMICOLON
+    (30) expression -> expression . PLUS terms
+    (31) expression -> expression . MINUS terms
+
+    SEMICOLON       shift and go to state 63
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+
+
+state 44
+
+    (8) condstatement -> IF LBRACKET simpleExpression . RBRACKET LCURLY ifstart statements ifend RCURLY
+    (9) condstatement -> IF LBRACKET simpleExpression . RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY
+    (19) simpleExpression -> simpleExpression . LOGICOROPS andExpression
+
+    RBRACKET        shift and go to state 64
+    LOGICOROPS      shift and go to state 46
+
+
+state 45
+
+    (7) returnstatement -> RETURNTYPE simpleExpression SEMICOLON .
+
+    RCURLY          reduce using rule 7 (returnstatement -> RETURNTYPE simpleExpression SEMICOLON .)
+    FUNCDEF         reduce using rule 7 (returnstatement -> RETURNTYPE simpleExpression SEMICOLON .)
+    IF              reduce using rule 7 (returnstatement -> RETURNTYPE simpleExpression SEMICOLON .)
+    RETURNTYPE      reduce using rule 7 (returnstatement -> RETURNTYPE simpleExpression SEMICOLON .)
+    INTTYPE         reduce using rule 7 (returnstatement -> RETURNTYPE simpleExpression SEMICOLON .)
+    FLOATTYPE       reduce using rule 7 (returnstatement -> RETURNTYPE simpleExpression SEMICOLON .)
+    DOUBLETYPE      reduce using rule 7 (returnstatement -> RETURNTYPE simpleExpression SEMICOLON .)
+    VOIDTYPE        reduce using rule 7 (returnstatement -> RETURNTYPE simpleExpression SEMICOLON .)
+    BOOLTYPE        reduce using rule 7 (returnstatement -> RETURNTYPE simpleExpression SEMICOLON .)
+
+
+state 46
+
+    (19) simpleExpression -> simpleExpression LOGICOROPS . andExpression
+    (21) andExpression -> . andExpression LOGICANDOPS relExpression
+    (22) andExpression -> . relExpression
+    (23) relExpression -> . expression GREATERTHAN expression
+    (24) relExpression -> . expression GREATERTHANEQUAL expression
+    (25) relExpression -> . expression LESSTHAN expression
+    (26) relExpression -> . expression LESSTHANEQUAL expression
+    (27) relExpression -> . expression EQUALEQUAL expression
+    (28) relExpression -> . expression NOTEQUAL expression
+    (29) relExpression -> . expression
+    (30) expression -> . expression PLUS terms
+    (31) expression -> . expression MINUS terms
+    (32) expression -> . terms
+    (33) terms -> . terms MUL factor
+    (34) terms -> . terms DIV factor
+    (35) terms -> . terms MOD factor
+    (36) terms -> . factor
+    (37) factor -> . NUMBER
+    (38) factor -> . FUNCDEF
+    (39) factor -> . LBRACKET expression RBRACKET
+
+    NUMBER          shift and go to state 37
+    FUNCDEF         shift and go to state 38
+    LBRACKET        shift and go to state 39
+
+    andExpression                  shift and go to state 65
+    relExpression                  shift and go to state 33
+    expression                     shift and go to state 34
+    terms                          shift and go to state 35
+    factor                         shift and go to state 36
+
+state 47
+
+    (21) andExpression -> andExpression LOGICANDOPS . relExpression
+    (23) relExpression -> . expression GREATERTHAN expression
+    (24) relExpression -> . expression GREATERTHANEQUAL expression
+    (25) relExpression -> . expression LESSTHAN expression
+    (26) relExpression -> . expression LESSTHANEQUAL expression
+    (27) relExpression -> . expression EQUALEQUAL expression
+    (28) relExpression -> . expression NOTEQUAL expression
+    (29) relExpression -> . expression
+    (30) expression -> . expression PLUS terms
+    (31) expression -> . expression MINUS terms
+    (32) expression -> . terms
+    (33) terms -> . terms MUL factor
+    (34) terms -> . terms DIV factor
+    (35) terms -> . terms MOD factor
+    (36) terms -> . factor
+    (37) factor -> . NUMBER
+    (38) factor -> . FUNCDEF
+    (39) factor -> . LBRACKET expression RBRACKET
+
+    NUMBER          shift and go to state 37
+    FUNCDEF         shift and go to state 38
+    LBRACKET        shift and go to state 39
+
+    relExpression                  shift and go to state 66
+    expression                     shift and go to state 34
+    terms                          shift and go to state 35
+    factor                         shift and go to state 36
+
+state 48
+
+    (23) relExpression -> expression GREATERTHAN . expression
+    (30) expression -> . expression PLUS terms
+    (31) expression -> . expression MINUS terms
+    (32) expression -> . terms
+    (33) terms -> . terms MUL factor
+    (34) terms -> . terms DIV factor
+    (35) terms -> . terms MOD factor
+    (36) terms -> . factor
+    (37) factor -> . NUMBER
+    (38) factor -> . FUNCDEF
+    (39) factor -> . LBRACKET expression RBRACKET
+
+    NUMBER          shift and go to state 37
+    FUNCDEF         shift and go to state 38
+    LBRACKET        shift and go to state 39
+
+    expression                     shift and go to state 67
+    terms                          shift and go to state 35
+    factor                         shift and go to state 36
+
+state 49
+
+    (24) relExpression -> expression GREATERTHANEQUAL . expression
+    (30) expression -> . expression PLUS terms
+    (31) expression -> . expression MINUS terms
+    (32) expression -> . terms
+    (33) terms -> . terms MUL factor
+    (34) terms -> . terms DIV factor
+    (35) terms -> . terms MOD factor
+    (36) terms -> . factor
+    (37) factor -> . NUMBER
+    (38) factor -> . FUNCDEF
+    (39) factor -> . LBRACKET expression RBRACKET
+
+    NUMBER          shift and go to state 37
+    FUNCDEF         shift and go to state 38
+    LBRACKET        shift and go to state 39
+
+    expression                     shift and go to state 68
+    terms                          shift and go to state 35
+    factor                         shift and go to state 36
+
+state 50
+
+    (25) relExpression -> expression LESSTHAN . expression
+    (30) expression -> . expression PLUS terms
+    (31) expression -> . expression MINUS terms
+    (32) expression -> . terms
+    (33) terms -> . terms MUL factor
+    (34) terms -> . terms DIV factor
+    (35) terms -> . terms MOD factor
+    (36) terms -> . factor
+    (37) factor -> . NUMBER
+    (38) factor -> . FUNCDEF
+    (39) factor -> . LBRACKET expression RBRACKET
+
+    NUMBER          shift and go to state 37
+    FUNCDEF         shift and go to state 38
+    LBRACKET        shift and go to state 39
+
+    expression                     shift and go to state 69
+    terms                          shift and go to state 35
+    factor                         shift and go to state 36
+
+state 51
+
+    (26) relExpression -> expression LESSTHANEQUAL . expression
+    (30) expression -> . expression PLUS terms
+    (31) expression -> . expression MINUS terms
+    (32) expression -> . terms
+    (33) terms -> . terms MUL factor
+    (34) terms -> . terms DIV factor
+    (35) terms -> . terms MOD factor
+    (36) terms -> . factor
+    (37) factor -> . NUMBER
+    (38) factor -> . FUNCDEF
+    (39) factor -> . LBRACKET expression RBRACKET
+
+    NUMBER          shift and go to state 37
+    FUNCDEF         shift and go to state 38
+    LBRACKET        shift and go to state 39
+
+    expression                     shift and go to state 70
+    terms                          shift and go to state 35
+    factor                         shift and go to state 36
+
+state 52
+
+    (27) relExpression -> expression EQUALEQUAL . expression
+    (30) expression -> . expression PLUS terms
+    (31) expression -> . expression MINUS terms
+    (32) expression -> . terms
+    (33) terms -> . terms MUL factor
+    (34) terms -> . terms DIV factor
+    (35) terms -> . terms MOD factor
+    (36) terms -> . factor
+    (37) factor -> . NUMBER
+    (38) factor -> . FUNCDEF
+    (39) factor -> . LBRACKET expression RBRACKET
+
+    NUMBER          shift and go to state 37
+    FUNCDEF         shift and go to state 38
+    LBRACKET        shift and go to state 39
+
+    expression                     shift and go to state 71
+    terms                          shift and go to state 35
+    factor                         shift and go to state 36
+
+state 53
+
+    (28) relExpression -> expression NOTEQUAL . expression
+    (30) expression -> . expression PLUS terms
+    (31) expression -> . expression MINUS terms
+    (32) expression -> . terms
+    (33) terms -> . terms MUL factor
+    (34) terms -> . terms DIV factor
+    (35) terms -> . terms MOD factor
+    (36) terms -> . factor
+    (37) factor -> . NUMBER
+    (38) factor -> . FUNCDEF
+    (39) factor -> . LBRACKET expression RBRACKET
+
+    NUMBER          shift and go to state 37
+    FUNCDEF         shift and go to state 38
+    LBRACKET        shift and go to state 39
+
+    expression                     shift and go to state 72
+    terms                          shift and go to state 35
+    factor                         shift and go to state 36
+
+state 54
+
+    (30) expression -> expression PLUS . terms
+    (33) terms -> . terms MUL factor
+    (34) terms -> . terms DIV factor
+    (35) terms -> . terms MOD factor
+    (36) terms -> . factor
+    (37) factor -> . NUMBER
+    (38) factor -> . FUNCDEF
+    (39) factor -> . LBRACKET expression RBRACKET
+
+    NUMBER          shift and go to state 37
+    FUNCDEF         shift and go to state 38
+    LBRACKET        shift and go to state 39
+
+    terms                          shift and go to state 73
+    factor                         shift and go to state 36
+
+state 55
+
+    (31) expression -> expression MINUS . terms
+    (33) terms -> . terms MUL factor
+    (34) terms -> . terms DIV factor
+    (35) terms -> . terms MOD factor
+    (36) terms -> . factor
+    (37) factor -> . NUMBER
+    (38) factor -> . FUNCDEF
+    (39) factor -> . LBRACKET expression RBRACKET
+
+    NUMBER          shift and go to state 37
+    FUNCDEF         shift and go to state 38
+    LBRACKET        shift and go to state 39
+
+    terms                          shift and go to state 74
+    factor                         shift and go to state 36
+
+state 56
+
+    (33) terms -> terms MUL . factor
+    (37) factor -> . NUMBER
+    (38) factor -> . FUNCDEF
+    (39) factor -> . LBRACKET expression RBRACKET
+
+    NUMBER          shift and go to state 37
+    FUNCDEF         shift and go to state 38
+    LBRACKET        shift and go to state 39
+
+    factor                         shift and go to state 75
+
+state 57
+
+    (34) terms -> terms DIV . factor
+    (37) factor -> . NUMBER
+    (38) factor -> . FUNCDEF
+    (39) factor -> . LBRACKET expression RBRACKET
+
+    NUMBER          shift and go to state 37
+    FUNCDEF         shift and go to state 38
+    LBRACKET        shift and go to state 39
+
+    factor                         shift and go to state 76
+
+state 58
+
+    (35) terms -> terms MOD . factor
+    (37) factor -> . NUMBER
+    (38) factor -> . FUNCDEF
+    (39) factor -> . LBRACKET expression RBRACKET
+
+    NUMBER          shift and go to state 37
+    FUNCDEF         shift and go to state 38
+    LBRACKET        shift and go to state 39
+
+    factor                         shift and go to state 77
+
+state 59
+
+    (39) factor -> LBRACKET expression . RBRACKET
+    (30) expression -> expression . PLUS terms
+    (31) expression -> expression . MINUS terms
+
+    RBRACKET        shift and go to state 78
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+
+
+state 60
+
+    (13) statement -> type FUNCDEF ASSIGNMENTOPS FUNCDEF . SEMICOLON
+    (38) factor -> FUNCDEF .
+
+  ! shift/reduce conflict for SEMICOLON resolved as shift
+    SEMICOLON       shift and go to state 79
+    MUL             reduce using rule 38 (factor -> FUNCDEF .)
+    DIV             reduce using rule 38 (factor -> FUNCDEF .)
+    MOD             reduce using rule 38 (factor -> FUNCDEF .)
+    PLUS            reduce using rule 38 (factor -> FUNCDEF .)
+    MINUS           reduce using rule 38 (factor -> FUNCDEF .)
+
+  ! SEMICOLON       [ reduce using rule 38 (factor -> FUNCDEF .) ]
+
+
+state 61
+
+    (11) statement -> type FUNCDEF ASSIGNMENTOPS expression . SEMICOLON
+    (30) expression -> expression . PLUS terms
+    (31) expression -> expression . MINUS terms
+
+    SEMICOLON       shift and go to state 80
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+
+
+state 62
+
+    (10) statement -> FUNCDEF ASSIGNMENTOPS expression SEMICOLON .
+
+    RCURLY          reduce using rule 10 (statement -> FUNCDEF ASSIGNMENTOPS expression SEMICOLON .)
+    FUNCDEF         reduce using rule 10 (statement -> FUNCDEF ASSIGNMENTOPS expression SEMICOLON .)
+    IF              reduce using rule 10 (statement -> FUNCDEF ASSIGNMENTOPS expression SEMICOLON .)
+    RETURNTYPE      reduce using rule 10 (statement -> FUNCDEF ASSIGNMENTOPS expression SEMICOLON .)
+    INTTYPE         reduce using rule 10 (statement -> FUNCDEF ASSIGNMENTOPS expression SEMICOLON .)
+    FLOATTYPE       reduce using rule 10 (statement -> FUNCDEF ASSIGNMENTOPS expression SEMICOLON .)
+    DOUBLETYPE      reduce using rule 10 (statement -> FUNCDEF ASSIGNMENTOPS expression SEMICOLON .)
+    VOIDTYPE        reduce using rule 10 (statement -> FUNCDEF ASSIGNMENTOPS expression SEMICOLON .)
+    BOOLTYPE        reduce using rule 10 (statement -> FUNCDEF ASSIGNMENTOPS expression SEMICOLON .)
+
+
+state 63
+
+    (14) statement -> FUNCDEF hybridEqual expression SEMICOLON .
+
+    RCURLY          reduce using rule 14 (statement -> FUNCDEF hybridEqual expression SEMICOLON .)
+    FUNCDEF         reduce using rule 14 (statement -> FUNCDEF hybridEqual expression SEMICOLON .)
+    IF              reduce using rule 14 (statement -> FUNCDEF hybridEqual expression SEMICOLON .)
+    RETURNTYPE      reduce using rule 14 (statement -> FUNCDEF hybridEqual expression SEMICOLON .)
+    INTTYPE         reduce using rule 14 (statement -> FUNCDEF hybridEqual expression SEMICOLON .)
+    FLOATTYPE       reduce using rule 14 (statement -> FUNCDEF hybridEqual expression SEMICOLON .)
+    DOUBLETYPE      reduce using rule 14 (statement -> FUNCDEF hybridEqual expression SEMICOLON .)
+    VOIDTYPE        reduce using rule 14 (statement -> FUNCDEF hybridEqual expression SEMICOLON .)
+    BOOLTYPE        reduce using rule 14 (statement -> FUNCDEF hybridEqual expression SEMICOLON .)
+
+
+state 64
+
+    (8) condstatement -> IF LBRACKET simpleExpression RBRACKET . LCURLY ifstart statements ifend RCURLY
+    (9) condstatement -> IF LBRACKET simpleExpression RBRACKET . LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY
+
+    LCURLY          shift and go to state 81
+
+
+state 65
+
+    (19) simpleExpression -> simpleExpression LOGICOROPS andExpression .
+    (21) andExpression -> andExpression . LOGICANDOPS relExpression
+
+    SEMICOLON       reduce using rule 19 (simpleExpression -> simpleExpression LOGICOROPS andExpression .)
+    LOGICOROPS      reduce using rule 19 (simpleExpression -> simpleExpression LOGICOROPS andExpression .)
+    RBRACKET        reduce using rule 19 (simpleExpression -> simpleExpression LOGICOROPS andExpression .)
+    LOGICANDOPS     shift and go to state 47
+
+
+state 66
+
+    (21) andExpression -> andExpression LOGICANDOPS relExpression .
+
+    LOGICANDOPS     reduce using rule 21 (andExpression -> andExpression LOGICANDOPS relExpression .)
+    SEMICOLON       reduce using rule 21 (andExpression -> andExpression LOGICANDOPS relExpression .)
+    LOGICOROPS      reduce using rule 21 (andExpression -> andExpression LOGICANDOPS relExpression .)
+    RBRACKET        reduce using rule 21 (andExpression -> andExpression LOGICANDOPS relExpression .)
+
+
+state 67
+
+    (23) relExpression -> expression GREATERTHAN expression .
+    (30) expression -> expression . PLUS terms
+    (31) expression -> expression . MINUS terms
+
+    LOGICANDOPS     reduce using rule 23 (relExpression -> expression GREATERTHAN expression .)
+    SEMICOLON       reduce using rule 23 (relExpression -> expression GREATERTHAN expression .)
+    LOGICOROPS      reduce using rule 23 (relExpression -> expression GREATERTHAN expression .)
+    RBRACKET        reduce using rule 23 (relExpression -> expression GREATERTHAN expression .)
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+
+
+state 68
+
+    (24) relExpression -> expression GREATERTHANEQUAL expression .
+    (30) expression -> expression . PLUS terms
+    (31) expression -> expression . MINUS terms
+
+    LOGICANDOPS     reduce using rule 24 (relExpression -> expression GREATERTHANEQUAL expression .)
+    SEMICOLON       reduce using rule 24 (relExpression -> expression GREATERTHANEQUAL expression .)
+    LOGICOROPS      reduce using rule 24 (relExpression -> expression GREATERTHANEQUAL expression .)
+    RBRACKET        reduce using rule 24 (relExpression -> expression GREATERTHANEQUAL expression .)
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+
+
+state 69
+
+    (25) relExpression -> expression LESSTHAN expression .
+    (30) expression -> expression . PLUS terms
+    (31) expression -> expression . MINUS terms
+
+    LOGICANDOPS     reduce using rule 25 (relExpression -> expression LESSTHAN expression .)
+    SEMICOLON       reduce using rule 25 (relExpression -> expression LESSTHAN expression .)
+    LOGICOROPS      reduce using rule 25 (relExpression -> expression LESSTHAN expression .)
+    RBRACKET        reduce using rule 25 (relExpression -> expression LESSTHAN expression .)
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+
+
+state 70
+
+    (26) relExpression -> expression LESSTHANEQUAL expression .
+    (30) expression -> expression . PLUS terms
+    (31) expression -> expression . MINUS terms
+
+    LOGICANDOPS     reduce using rule 26 (relExpression -> expression LESSTHANEQUAL expression .)
+    SEMICOLON       reduce using rule 26 (relExpression -> expression LESSTHANEQUAL expression .)
+    LOGICOROPS      reduce using rule 26 (relExpression -> expression LESSTHANEQUAL expression .)
+    RBRACKET        reduce using rule 26 (relExpression -> expression LESSTHANEQUAL expression .)
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+
+
+state 71
+
+    (27) relExpression -> expression EQUALEQUAL expression .
+    (30) expression -> expression . PLUS terms
+    (31) expression -> expression . MINUS terms
+
+    LOGICANDOPS     reduce using rule 27 (relExpression -> expression EQUALEQUAL expression .)
+    SEMICOLON       reduce using rule 27 (relExpression -> expression EQUALEQUAL expression .)
+    LOGICOROPS      reduce using rule 27 (relExpression -> expression EQUALEQUAL expression .)
+    RBRACKET        reduce using rule 27 (relExpression -> expression EQUALEQUAL expression .)
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+
+
+state 72
+
+    (28) relExpression -> expression NOTEQUAL expression .
+    (30) expression -> expression . PLUS terms
+    (31) expression -> expression . MINUS terms
+
+    LOGICANDOPS     reduce using rule 28 (relExpression -> expression NOTEQUAL expression .)
+    SEMICOLON       reduce using rule 28 (relExpression -> expression NOTEQUAL expression .)
+    LOGICOROPS      reduce using rule 28 (relExpression -> expression NOTEQUAL expression .)
+    RBRACKET        reduce using rule 28 (relExpression -> expression NOTEQUAL expression .)
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+
+
+state 73
+
+    (30) expression -> expression PLUS terms .
+    (33) terms -> terms . MUL factor
+    (34) terms -> terms . DIV factor
+    (35) terms -> terms . MOD factor
+
+    GREATERTHAN     reduce using rule 30 (expression -> expression PLUS terms .)
+    GREATERTHANEQUAL reduce using rule 30 (expression -> expression PLUS terms .)
+    LESSTHAN        reduce using rule 30 (expression -> expression PLUS terms .)
+    LESSTHANEQUAL   reduce using rule 30 (expression -> expression PLUS terms .)
+    EQUALEQUAL      reduce using rule 30 (expression -> expression PLUS terms .)
+    NOTEQUAL        reduce using rule 30 (expression -> expression PLUS terms .)
+    PLUS            reduce using rule 30 (expression -> expression PLUS terms .)
+    MINUS           reduce using rule 30 (expression -> expression PLUS terms .)
+    LOGICANDOPS     reduce using rule 30 (expression -> expression PLUS terms .)
+    SEMICOLON       reduce using rule 30 (expression -> expression PLUS terms .)
+    LOGICOROPS      reduce using rule 30 (expression -> expression PLUS terms .)
+    RBRACKET        reduce using rule 30 (expression -> expression PLUS terms .)
+    MUL             shift and go to state 56
+    DIV             shift and go to state 57
+    MOD             shift and go to state 58
+
+
+state 74
+
+    (31) expression -> expression MINUS terms .
+    (33) terms -> terms . MUL factor
+    (34) terms -> terms . DIV factor
+    (35) terms -> terms . MOD factor
+
+    GREATERTHAN     reduce using rule 31 (expression -> expression MINUS terms .)
+    GREATERTHANEQUAL reduce using rule 31 (expression -> expression MINUS terms .)
+    LESSTHAN        reduce using rule 31 (expression -> expression MINUS terms .)
+    LESSTHANEQUAL   reduce using rule 31 (expression -> expression MINUS terms .)
+    EQUALEQUAL      reduce using rule 31 (expression -> expression MINUS terms .)
+    NOTEQUAL        reduce using rule 31 (expression -> expression MINUS terms .)
+    PLUS            reduce using rule 31 (expression -> expression MINUS terms .)
+    MINUS           reduce using rule 31 (expression -> expression MINUS terms .)
+    LOGICANDOPS     reduce using rule 31 (expression -> expression MINUS terms .)
+    SEMICOLON       reduce using rule 31 (expression -> expression MINUS terms .)
+    LOGICOROPS      reduce using rule 31 (expression -> expression MINUS terms .)
+    RBRACKET        reduce using rule 31 (expression -> expression MINUS terms .)
+    MUL             shift and go to state 56
+    DIV             shift and go to state 57
+    MOD             shift and go to state 58
+
+
+state 75
+
+    (33) terms -> terms MUL factor .
+
+    MUL             reduce using rule 33 (terms -> terms MUL factor .)
+    DIV             reduce using rule 33 (terms -> terms MUL factor .)
+    MOD             reduce using rule 33 (terms -> terms MUL factor .)
+    GREATERTHAN     reduce using rule 33 (terms -> terms MUL factor .)
+    GREATERTHANEQUAL reduce using rule 33 (terms -> terms MUL factor .)
+    LESSTHAN        reduce using rule 33 (terms -> terms MUL factor .)
+    LESSTHANEQUAL   reduce using rule 33 (terms -> terms MUL factor .)
+    EQUALEQUAL      reduce using rule 33 (terms -> terms MUL factor .)
+    NOTEQUAL        reduce using rule 33 (terms -> terms MUL factor .)
+    PLUS            reduce using rule 33 (terms -> terms MUL factor .)
+    MINUS           reduce using rule 33 (terms -> terms MUL factor .)
+    LOGICANDOPS     reduce using rule 33 (terms -> terms MUL factor .)
+    SEMICOLON       reduce using rule 33 (terms -> terms MUL factor .)
+    LOGICOROPS      reduce using rule 33 (terms -> terms MUL factor .)
+    RBRACKET        reduce using rule 33 (terms -> terms MUL factor .)
+
+
+state 76
+
+    (34) terms -> terms DIV factor .
+
+    MUL             reduce using rule 34 (terms -> terms DIV factor .)
+    DIV             reduce using rule 34 (terms -> terms DIV factor .)
+    MOD             reduce using rule 34 (terms -> terms DIV factor .)
+    GREATERTHAN     reduce using rule 34 (terms -> terms DIV factor .)
+    GREATERTHANEQUAL reduce using rule 34 (terms -> terms DIV factor .)
+    LESSTHAN        reduce using rule 34 (terms -> terms DIV factor .)
+    LESSTHANEQUAL   reduce using rule 34 (terms -> terms DIV factor .)
+    EQUALEQUAL      reduce using rule 34 (terms -> terms DIV factor .)
+    NOTEQUAL        reduce using rule 34 (terms -> terms DIV factor .)
+    PLUS            reduce using rule 34 (terms -> terms DIV factor .)
+    MINUS           reduce using rule 34 (terms -> terms DIV factor .)
+    LOGICANDOPS     reduce using rule 34 (terms -> terms DIV factor .)
+    SEMICOLON       reduce using rule 34 (terms -> terms DIV factor .)
+    LOGICOROPS      reduce using rule 34 (terms -> terms DIV factor .)
+    RBRACKET        reduce using rule 34 (terms -> terms DIV factor .)
+
+
+state 77
+
+    (35) terms -> terms MOD factor .
+
+    MUL             reduce using rule 35 (terms -> terms MOD factor .)
+    DIV             reduce using rule 35 (terms -> terms MOD factor .)
+    MOD             reduce using rule 35 (terms -> terms MOD factor .)
+    GREATERTHAN     reduce using rule 35 (terms -> terms MOD factor .)
+    GREATERTHANEQUAL reduce using rule 35 (terms -> terms MOD factor .)
+    LESSTHAN        reduce using rule 35 (terms -> terms MOD factor .)
+    LESSTHANEQUAL   reduce using rule 35 (terms -> terms MOD factor .)
+    EQUALEQUAL      reduce using rule 35 (terms -> terms MOD factor .)
+    NOTEQUAL        reduce using rule 35 (terms -> terms MOD factor .)
+    PLUS            reduce using rule 35 (terms -> terms MOD factor .)
+    MINUS           reduce using rule 35 (terms -> terms MOD factor .)
+    LOGICANDOPS     reduce using rule 35 (terms -> terms MOD factor .)
+    SEMICOLON       reduce using rule 35 (terms -> terms MOD factor .)
+    LOGICOROPS      reduce using rule 35 (terms -> terms MOD factor .)
+    RBRACKET        reduce using rule 35 (terms -> terms MOD factor .)
+
+
+state 78
+
+    (39) factor -> LBRACKET expression RBRACKET .
+
+    MUL             reduce using rule 39 (factor -> LBRACKET expression RBRACKET .)
+    DIV             reduce using rule 39 (factor -> LBRACKET expression RBRACKET .)
+    MOD             reduce using rule 39 (factor -> LBRACKET expression RBRACKET .)
+    GREATERTHAN     reduce using rule 39 (factor -> LBRACKET expression RBRACKET .)
+    GREATERTHANEQUAL reduce using rule 39 (factor -> LBRACKET expression RBRACKET .)
+    LESSTHAN        reduce using rule 39 (factor -> LBRACKET expression RBRACKET .)
+    LESSTHANEQUAL   reduce using rule 39 (factor -> LBRACKET expression RBRACKET .)
+    EQUALEQUAL      reduce using rule 39 (factor -> LBRACKET expression RBRACKET .)
+    NOTEQUAL        reduce using rule 39 (factor -> LBRACKET expression RBRACKET .)
+    PLUS            reduce using rule 39 (factor -> LBRACKET expression RBRACKET .)
+    MINUS           reduce using rule 39 (factor -> LBRACKET expression RBRACKET .)
+    LOGICANDOPS     reduce using rule 39 (factor -> LBRACKET expression RBRACKET .)
+    SEMICOLON       reduce using rule 39 (factor -> LBRACKET expression RBRACKET .)
+    LOGICOROPS      reduce using rule 39 (factor -> LBRACKET expression RBRACKET .)
+    RBRACKET        reduce using rule 39 (factor -> LBRACKET expression RBRACKET .)
+
+
+state 79
+
+    (13) statement -> type FUNCDEF ASSIGNMENTOPS FUNCDEF SEMICOLON .
+
+    RCURLY          reduce using rule 13 (statement -> type FUNCDEF ASSIGNMENTOPS FUNCDEF SEMICOLON .)
+    FUNCDEF         reduce using rule 13 (statement -> type FUNCDEF ASSIGNMENTOPS FUNCDEF SEMICOLON .)
+    IF              reduce using rule 13 (statement -> type FUNCDEF ASSIGNMENTOPS FUNCDEF SEMICOLON .)
+    RETURNTYPE      reduce using rule 13 (statement -> type FUNCDEF ASSIGNMENTOPS FUNCDEF SEMICOLON .)
+    INTTYPE         reduce using rule 13 (statement -> type FUNCDEF ASSIGNMENTOPS FUNCDEF SEMICOLON .)
+    FLOATTYPE       reduce using rule 13 (statement -> type FUNCDEF ASSIGNMENTOPS FUNCDEF SEMICOLON .)
+    DOUBLETYPE      reduce using rule 13 (statement -> type FUNCDEF ASSIGNMENTOPS FUNCDEF SEMICOLON .)
+    VOIDTYPE        reduce using rule 13 (statement -> type FUNCDEF ASSIGNMENTOPS FUNCDEF SEMICOLON .)
+    BOOLTYPE        reduce using rule 13 (statement -> type FUNCDEF ASSIGNMENTOPS FUNCDEF SEMICOLON .)
+
+
+state 80
+
+    (11) statement -> type FUNCDEF ASSIGNMENTOPS expression SEMICOLON .
+
+    RCURLY          reduce using rule 11 (statement -> type FUNCDEF ASSIGNMENTOPS expression SEMICOLON .)
+    FUNCDEF         reduce using rule 11 (statement -> type FUNCDEF ASSIGNMENTOPS expression SEMICOLON .)
+    IF              reduce using rule 11 (statement -> type FUNCDEF ASSIGNMENTOPS expression SEMICOLON .)
+    RETURNTYPE      reduce using rule 11 (statement -> type FUNCDEF ASSIGNMENTOPS expression SEMICOLON .)
+    INTTYPE         reduce using rule 11 (statement -> type FUNCDEF ASSIGNMENTOPS expression SEMICOLON .)
+    FLOATTYPE       reduce using rule 11 (statement -> type FUNCDEF ASSIGNMENTOPS expression SEMICOLON .)
+    DOUBLETYPE      reduce using rule 11 (statement -> type FUNCDEF ASSIGNMENTOPS expression SEMICOLON .)
+    VOIDTYPE        reduce using rule 11 (statement -> type FUNCDEF ASSIGNMENTOPS expression SEMICOLON .)
+    BOOLTYPE        reduce using rule 11 (statement -> type FUNCDEF ASSIGNMENTOPS expression SEMICOLON .)
+
+
+state 81
+
+    (8) condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY . ifstart statements ifend RCURLY
+    (9) condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY . ifstart statements ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY
+    (46) ifstart -> . empty
+    (45) empty -> .
+
+    FUNCDEF         reduce using rule 45 (empty -> .)
+    IF              reduce using rule 45 (empty -> .)
+    RETURNTYPE      reduce using rule 45 (empty -> .)
+    INTTYPE         reduce using rule 45 (empty -> .)
+    FLOATTYPE       reduce using rule 45 (empty -> .)
+    DOUBLETYPE      reduce using rule 45 (empty -> .)
+    VOIDTYPE        reduce using rule 45 (empty -> .)
+    BOOLTYPE        reduce using rule 45 (empty -> .)
+    RCURLY          reduce using rule 45 (empty -> .)
+
+    ifstart                        shift and go to state 82
+    empty                          shift and go to state 83
+
+state 82
+
+    (8) condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart . statements ifend RCURLY
+    (9) condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart . statements ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY
+    (2) statements -> . statements allstatement
+    (3) statements -> . empty
+    (45) empty -> .
+
+    FUNCDEF         reduce using rule 45 (empty -> .)
+    IF              reduce using rule 45 (empty -> .)
+    RETURNTYPE      reduce using rule 45 (empty -> .)
+    INTTYPE         reduce using rule 45 (empty -> .)
+    FLOATTYPE       reduce using rule 45 (empty -> .)
+    DOUBLETYPE      reduce using rule 45 (empty -> .)
+    VOIDTYPE        reduce using rule 45 (empty -> .)
+    BOOLTYPE        reduce using rule 45 (empty -> .)
+    RCURLY          reduce using rule 45 (empty -> .)
+
+    statements                     shift and go to state 84
+    empty                          shift and go to state 13
+
+state 83
+
+    (46) ifstart -> empty .
+
+    FUNCDEF         reduce using rule 46 (ifstart -> empty .)
+    IF              reduce using rule 46 (ifstart -> empty .)
+    RETURNTYPE      reduce using rule 46 (ifstart -> empty .)
+    INTTYPE         reduce using rule 46 (ifstart -> empty .)
+    FLOATTYPE       reduce using rule 46 (ifstart -> empty .)
+    DOUBLETYPE      reduce using rule 46 (ifstart -> empty .)
+    VOIDTYPE        reduce using rule 46 (ifstart -> empty .)
+    BOOLTYPE        reduce using rule 46 (ifstart -> empty .)
+    RCURLY          reduce using rule 46 (ifstart -> empty .)
+
+
+state 84
+
+    (8) condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements . ifend RCURLY
+    (9) condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements . ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY
+    (2) statements -> statements . allstatement
+    (47) ifend -> . empty
+    (4) allstatement -> . statement
+    (5) allstatement -> . condstatement
+    (6) allstatement -> . returnstatement
+    (45) empty -> .
+    (10) statement -> . FUNCDEF ASSIGNMENTOPS expression SEMICOLON
+    (11) statement -> . type FUNCDEF ASSIGNMENTOPS expression SEMICOLON
+    (12) statement -> . type FUNCDEF SEMICOLON
+    (13) statement -> . type FUNCDEF ASSIGNMENTOPS FUNCDEF SEMICOLON
+    (14) statement -> . FUNCDEF hybridEqual expression SEMICOLON
+    (8) condstatement -> . IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY
+    (9) condstatement -> . IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY
+    (7) returnstatement -> . RETURNTYPE simpleExpression SEMICOLON
+    (40) type -> . INTTYPE
+    (41) type -> . FLOATTYPE
+    (42) type -> . DOUBLETYPE
+    (43) type -> . VOIDTYPE
+    (44) type -> . BOOLTYPE
+
+    RCURLY          reduce using rule 45 (empty -> .)
+    FUNCDEF         shift and go to state 15
+    IF              shift and go to state 21
+    RETURNTYPE      shift and go to state 22
+    INTTYPE         shift and go to state 3
+    FLOATTYPE       shift and go to state 4
+    DOUBLETYPE      shift and go to state 5
+    VOIDTYPE        shift and go to state 6
+    BOOLTYPE        shift and go to state 7
+
+    ifend                          shift and go to state 85
+    allstatement                   shift and go to state 17
+    empty                          shift and go to state 86
+    statement                      shift and go to state 18
+    condstatement                  shift and go to state 19
+    returnstatement                shift and go to state 20
+    type                           shift and go to state 14
+
+state 85
+
+    (8) condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend . RCURLY
+    (9) condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend . RCURLY ELSE LCURLY elsestart statements elseend RCURLY
+
+    RCURLY          shift and go to state 87
+
+
+state 86
+
+    (47) ifend -> empty .
+
+    RCURLY          reduce using rule 47 (ifend -> empty .)
+
+
+state 87
+
+    (8) condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY .
+    (9) condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY . ELSE LCURLY elsestart statements elseend RCURLY
+
+    RCURLY          reduce using rule 8 (condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY .)
+    FUNCDEF         reduce using rule 8 (condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY .)
+    IF              reduce using rule 8 (condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY .)
+    RETURNTYPE      reduce using rule 8 (condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY .)
+    INTTYPE         reduce using rule 8 (condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY .)
+    FLOATTYPE       reduce using rule 8 (condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY .)
+    DOUBLETYPE      reduce using rule 8 (condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY .)
+    VOIDTYPE        reduce using rule 8 (condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY .)
+    BOOLTYPE        reduce using rule 8 (condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY .)
+    ELSE            shift and go to state 88
+
+
+state 88
+
+    (9) condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE . LCURLY elsestart statements elseend RCURLY
+
+    LCURLY          shift and go to state 89
+
+
+state 89
+
+    (9) condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY . elsestart statements elseend RCURLY
+    (48) elsestart -> . empty
+    (45) empty -> .
+
+    FUNCDEF         reduce using rule 45 (empty -> .)
+    IF              reduce using rule 45 (empty -> .)
+    RETURNTYPE      reduce using rule 45 (empty -> .)
+    INTTYPE         reduce using rule 45 (empty -> .)
+    FLOATTYPE       reduce using rule 45 (empty -> .)
+    DOUBLETYPE      reduce using rule 45 (empty -> .)
+    VOIDTYPE        reduce using rule 45 (empty -> .)
+    BOOLTYPE        reduce using rule 45 (empty -> .)
+    RCURLY          reduce using rule 45 (empty -> .)
+
+    elsestart                      shift and go to state 90
+    empty                          shift and go to state 91
+
+state 90
+
+    (9) condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart . statements elseend RCURLY
+    (2) statements -> . statements allstatement
+    (3) statements -> . empty
+    (45) empty -> .
+
+    FUNCDEF         reduce using rule 45 (empty -> .)
+    IF              reduce using rule 45 (empty -> .)
+    RETURNTYPE      reduce using rule 45 (empty -> .)
+    INTTYPE         reduce using rule 45 (empty -> .)
+    FLOATTYPE       reduce using rule 45 (empty -> .)
+    DOUBLETYPE      reduce using rule 45 (empty -> .)
+    VOIDTYPE        reduce using rule 45 (empty -> .)
+    BOOLTYPE        reduce using rule 45 (empty -> .)
+    RCURLY          reduce using rule 45 (empty -> .)
+
+    statements                     shift and go to state 92
+    empty                          shift and go to state 13
+
+state 91
+
+    (48) elsestart -> empty .
+
+    FUNCDEF         reduce using rule 48 (elsestart -> empty .)
+    IF              reduce using rule 48 (elsestart -> empty .)
+    RETURNTYPE      reduce using rule 48 (elsestart -> empty .)
+    INTTYPE         reduce using rule 48 (elsestart -> empty .)
+    FLOATTYPE       reduce using rule 48 (elsestart -> empty .)
+    DOUBLETYPE      reduce using rule 48 (elsestart -> empty .)
+    VOIDTYPE        reduce using rule 48 (elsestart -> empty .)
+    BOOLTYPE        reduce using rule 48 (elsestart -> empty .)
+    RCURLY          reduce using rule 48 (elsestart -> empty .)
+
+
+state 92
+
+    (9) condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart statements . elseend RCURLY
+    (2) statements -> statements . allstatement
+    (49) elseend -> . empty
+    (4) allstatement -> . statement
+    (5) allstatement -> . condstatement
+    (6) allstatement -> . returnstatement
+    (45) empty -> .
+    (10) statement -> . FUNCDEF ASSIGNMENTOPS expression SEMICOLON
+    (11) statement -> . type FUNCDEF ASSIGNMENTOPS expression SEMICOLON
+    (12) statement -> . type FUNCDEF SEMICOLON
+    (13) statement -> . type FUNCDEF ASSIGNMENTOPS FUNCDEF SEMICOLON
+    (14) statement -> . FUNCDEF hybridEqual expression SEMICOLON
+    (8) condstatement -> . IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY
+    (9) condstatement -> . IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY
+    (7) returnstatement -> . RETURNTYPE simpleExpression SEMICOLON
+    (40) type -> . INTTYPE
+    (41) type -> . FLOATTYPE
+    (42) type -> . DOUBLETYPE
+    (43) type -> . VOIDTYPE
+    (44) type -> . BOOLTYPE
+
+    RCURLY          reduce using rule 45 (empty -> .)
+    FUNCDEF         shift and go to state 15
+    IF              shift and go to state 21
+    RETURNTYPE      shift and go to state 22
+    INTTYPE         shift and go to state 3
+    FLOATTYPE       shift and go to state 4
+    DOUBLETYPE      shift and go to state 5
+    VOIDTYPE        shift and go to state 6
+    BOOLTYPE        shift and go to state 7
+
+    elseend                        shift and go to state 93
+    allstatement                   shift and go to state 17
+    empty                          shift and go to state 94
+    statement                      shift and go to state 18
+    condstatement                  shift and go to state 19
+    returnstatement                shift and go to state 20
+    type                           shift and go to state 14
+
+state 93
+
+    (9) condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart statements elseend . RCURLY
+
+    RCURLY          shift and go to state 95
+
+
+state 94
+
+    (49) elseend -> empty .
+
+    RCURLY          reduce using rule 49 (elseend -> empty .)
+
+
+state 95
+
+    (9) condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY .
+
+    RCURLY          reduce using rule 9 (condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY .)
+    FUNCDEF         reduce using rule 9 (condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY .)
+    IF              reduce using rule 9 (condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY .)
+    RETURNTYPE      reduce using rule 9 (condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY .)
+    INTTYPE         reduce using rule 9 (condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY .)
+    FLOATTYPE       reduce using rule 9 (condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY .)
+    DOUBLETYPE      reduce using rule 9 (condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY .)
+    VOIDTYPE        reduce using rule 9 (condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY .)
+    BOOLTYPE        reduce using rule 9 (condstatement -> IF LBRACKET simpleExpression RBRACKET LCURLY ifstart statements ifend RCURLY ELSE LCURLY elsestart statements elseend RCURLY .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for SEMICOLON in state 60 resolved as shift
